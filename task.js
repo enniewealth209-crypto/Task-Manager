@@ -10,7 +10,7 @@ const pendingCount = document.getElementById("pending-count");
 const completedCount = document.getElementById("completed-count");
 
 // Load external form
-fetch("create-task-form.html")
+fetch("task-form.html")
     .then(res => res.text())
     .then(html => {
         formContainer.innerHTML = html;
@@ -84,8 +84,8 @@ function initializeFormEvents() {
                 <span class="priority-${priority.toLowerCase()}">${priority}</span>
             </div>
             <div class="card-deadline">
-                <span>📅 ${date}</span>
-                <span>⏰ ${time}</span>
+                <span><i class='bx bx-calendar-event'></i> ${date}</span>
+                <span><i class='bx bx-stopwatch'></i> ${time}</span>
             </div>
         `;
 
