@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In</title>
+<link rel="stylesheet" href="css/sign_in.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Left Side -->
+    <div class="left">
+        <h1>Welcome <span>Back.</span></h1>
+        <p>Sign in to continue organizing tasks and boosting your productivity.</p>
+
+        <form id="signinForm">
+            <div class="input-group">
+                <input type="email" id="signinEmail" placeholder="Email Address" required>
+            </div>
+
+            <div class="input-group password-box">
+                <input type="password" id="password" placeholder="Password" required>
+                <span id="togglePassword">👁</span>
+            </div>
+
+            <div class="options">
+                <label>
+                    <input type="checkbox">
+                    Remember me
+                </label>
+
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit">Sign In</button>
+            <p class="signup">
+                Don't have an account?
+                <a href="signup.html">Sign Up</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- Right Side -->
+    <div class="right">
+        <img src="luv.png" alt="Illustration">
+    </div>
+
+</div>
+
+<script>
+    // Sign In: look up the stored user by email and redirect to dashboard
+    document.getElementById("signinForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const email = document.getElementById("signinEmail").value.trim();
+        const stored = JSON.parse(localStorage.getItem("taskflowUser"));
+
+        if (stored && stored.email === email) {
+            // Already have their name — just go to dashboard
+            window.location.href = "dashboard.html";
+        } else {
+            // Email not recognised — store what we know and go to dashboard
+            // (name will show as "User" since we don't have it from sign-in alone)
+            localStorage.setItem("taskflowUser", JSON.stringify({
+                name: stored ? stored.name : "User",
+                email: email
+            }));
+            window.location.href = "dashboard.html";
+        }
+    });
+
+    // Password visibility toggle
+    document.getElementById("togglePassword").addEventListener("click", function() {
+        const p = document.getElementById("password");
+        p.type = p.type === "password" ? "text" : "password";
+    });
+</script>
+
+</body>
+</html>

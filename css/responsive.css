@@ -1,0 +1,176 @@
+/* ======================
+   LAPTOP
+====================== */
+
+@media (max-width:1200px){
+
+    .dashboard{
+        padding:20px;
+    }
+
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+@media (max-width:1024px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width:768px){
+
+    .sidebar{
+        display:none;
+    }
+
+    .app{
+        display:block;
+    }
+
+    .dashboard{
+        padding:20px;
+        padding-bottom:100px;
+    }
+
+    .dashboards{
+        padding:20px;
+        padding-bottom:100px;
+    }
+
+    .dashboard-header{
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+    }
+
+    .header-div{
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .bottom-nav{
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+
+        position:fixed;
+        bottom:0;
+        left:0;
+
+        width:100%;
+        height:70px;
+
+        background:white;
+        border-top:1px solid #e5e7eb;
+
+        z-index:1000;
+    }
+
+    .bottom-nav a span{
+        font-size: 1rem;
+    }
+
+    .calendar-grid{
+        gap:5px;
+    }
+
+    .calendar-day{
+        min-height:70px;
+        font-size:.85rem;
+    }
+
+
+
+    .register-card,
+    .task-form{
+        padding:25px;
+    }
+
+}
+
+/* ==========================
+   SMALL PHONES
+========================== */
+
+@media (max-width:480px){
+
+    .dashboard{
+        padding:15px;
+        padding-bottom:100px;
+    }
+
+    .register-card,
+    .task-form{
+        padding:20px;
+    }
+
+    .dashboard-header h1{
+        font-size:1.5rem;
+    }
+
+    .add-btn {
+        width: 55px;
+        height: 55px; 
+        font-size: 1.6rem; 
+        bottom: 15px; 
+        right: 15px; 
+    }
+
+    .header-title { 
+        padding: 12px 15px; 
+    }
+
+    .header-title h2 {
+        font-size: 18px;
+    }
+    
+    .icons { 
+        font-size: 20px; 
+        gap: 10px; 
+    }
+
+    .dashboard .box { 
+        font-size: 13px; 
+        padding: 8px 12px; 
+    }
+
+    .container { 
+        margin: 20px 15px; 
+        padding: 20px 15px; 
+    }
+
+    .container img { 
+        width: 140px; 
+    }
+
+    .task-model { 
+        padding: 20px 15px; gap: 15px; 
+    }
+
+    .due { 
+        grid-template-columns: 1fr; 
+    }
+
+    .task-grid { 
+        padding: 10px; 
+        gap: 10px; 
+    }
+
+    .task-card { 
+        padding: 15px; 
+    }
+}

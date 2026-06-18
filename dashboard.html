@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    
+</head>
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h2>TaskFlow</h2>
+
+        <nav>
+
+            <a href="dashboard.html" class="active">
+                <i data-lucide="house"></i>
+                <span>Home</span>
+            </a>
+
+            <a href="task.html">
+                <i data-lucide="check-square"></i>
+                <span>Tasks</span>
+            </a>
+
+            <a href="analytics.html">
+                <i data-lucide="bar-chart-3"></i>
+                <span>Analytics</span>
+            </a>
+
+            <a href="calendar.html">
+                <i data-lucide="calendar-days"></i>
+                <span>Calendar</span>
+            </a>
+
+            <a href="profile.html">
+                <i data-lucide="user"></i>
+                <span>Profile</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard">
+
+        <!-- HEADER -->
+
+        <div class="dashboard-header">
+
+            <div class="user-info">
+
+                <h1 id="welcomeMessage">
+                    Good Morning 👋
+                </h1>
+
+                <p>
+                    Welcome back to TaskFlow
+                </p>
+
+            </div>
+
+            <div class="header-actions">
+
+                <button class="notification-btn">
+                    🔔
+                </button>
+
+                <div class="profile-area">
+
+                    <i data-lucide="user"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ANALYTICS LINK -->
+
+        <div class="dashboard-links">
+
+            <a href="analytics.html">
+                View Analytics →
+            </a>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <h3>Total Tasks</h3>
+                <h1 id="totalTasks">0</h1>
+            </div>
+
+            <div class="stat-card">
+                <h3>Completed</h3>
+                <h1 id="completedTasks">0</h1>
+            </div>
+
+            <div class="stat-card">
+                <h3>Pending</h3>
+                <h1 id="pendingTasks">0</h1>
+            </div>
+
+            <div class="stat-card">
+                <h3>Completion %</h3>
+                <h1 id="completionRate">0%</h1>
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-links">
+            <a href="task.html">
+                My Tasks →
+            </a>
+
+        </div>
+        <!-- TASK AREA -->
+
+        <div class="container" id="empty-state">
+            <img src="asset/no task.png" alt="No task yet">
+            <h2>No task yet</h2>
+            <p>Stay organized and productive.</p>
+            <p>Your tasks appear here. </p>
+        </div>
+
+        <div class="task-grid" id="task-grid">
+            
+        </div>
+
+    </main>
+
+</div>
+
+<!-- FLOATING BUTTON -->
+
+
+<!-- MOBILE NAVIGATION -->
+
+<div class="bottom-nav">
+
+    <a href="dashboard.html" class="nav-item active">
+        <i data-lucide="house"></i>
+        <span>Home</span>
+    </a>
+
+    <a href="task.html" class="nav-item">
+        <i data-lucide="check-square"></i>
+        <span>Tasks</span>
+    </a>
+
+    <a href="analytics.html" class="nav-item">
+        <i data-lucide="bar-chart-3"></i>
+        <span>Analytics</span>
+    </a>
+
+    <a href="calendar.html" class="nav-item">
+        <i data-lucide="calendar-days"></i>
+        <span>Calendar</span>
+    </a>
+
+    <a href="profile.html" class="nav-item">
+        <i data-lucide="user"></i>
+        <span>Profile</span>
+    </a>
+
+</div>
+
+<script>
+
+const user = JSON.parse(localStorage.getItem("taskflowUser"));
+
+function getGreeting() {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good Morning";
+    if (hour < 17) return "Good Afternoon";
+    return "Good Evening";
+}
+
+if (user) {
+    document.getElementById("welcomeMessage").textContent =
+        `${getGreeting()}, ${user.name} 👋`;
+} else {
+    document.getElementById("welcomeMessage").textContent =
+        `${getGreeting()} 👋`;
+}
+
+</script>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<script src="task.js"></script>
+
+</body>
+</html>

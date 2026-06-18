@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+
+        /* ── PAGE LAYOUT ── */
+        .details-main {
+            padding: 30px;
+            padding-bottom: 100px;
+            max-width: 720px;
+        }
+
+        /* ── BACK BUTTON ── */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .back-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ── DETAIL CARD ── */
+        .detail-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        /* title row */
+        .detail-title-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .detail-title-row h1 {
+            font-size: 1.5rem;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .detail-title-row h1.done {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+
+        /* badges */
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .badge-category {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .badge-low      { background: #dcfce7; color: #16a34a; }
+        .badge-medium   { background: #fef3c7; color: #d97706; }
+        .badge-high     { background: #fee2e2; color: #dc2626; }
+
+        .badge-done     { background: #dcfce7; color: #16a34a; }
+        .badge-pending  { background: #f3f4f6; color: #6b7280; }
+
+        /* description */
+        .detail-section-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .detail-description {
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 0.97rem;
+            margin-bottom: 28px;
+        }
+
+        /* meta grid */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .meta-item {
+            background: var(--background);
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+
+        .meta-item .meta-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--gray);
+            margin-bottom: 6px;
+        }
+
+        .meta-item .meta-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* ── ACTION BUTTONS ── */
+        .action-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 130px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity .2s, transform .15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover   { opacity: .88; transform: translateY(-2px); }
+        .btn:active  { transform: translateY(0); }
+
+        .btn-complete {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-complete.is-done {
+            background: #22c55e;
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* ── NOT FOUND STATE ── */
+        .not-found {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--gray);
+        }
+
+        .not-found h2 { margin-bottom: 12px; color: #aaa; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .details-main { padding: 20px; padding-bottom: 100px; }
+        }
+
+        @media (max-width: 480px) {
+            .details-main { padding: 16px; padding-bottom: 90px; }
+            .detail-card  { padding: 20px; }
+            .detail-title-row h1 { font-size: 1.25rem; }
+            .meta-grid { grid-template-columns: 1fr; }
+            .btn { flex: 1 1 100%; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <h2>TaskFlow</h2>
+
+        <nav>
+
+            <a href="dashboard.html">
+                <i data-lucide="house"></i>
+                <span>Home</span>
+            </a>
+
+            <a href="task.html" class="active">
+                <i data-lucide="check-square"></i>
+                <span>Tasks</span>
+            </a>
+
+            <a href="analytics.html">
+                <i data-lucide="bar-chart-3"></i>
+                <span>Analytics</span>
+            </a>
+
+            <a href="calendar.html">
+                <i data-lucide="calendar-days"></i>
+                <span>Calendar</span>
+            </a>
+
+            <a href="profile.html">
+                <i data-lucide="user"></i>
+                <span>Profile</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="dashboard details-main">
+
+        <button class="back-btn" onclick="history.back()">
+            <i data-lucide="arrow-left"></i>
+            Back to Tasks
+        </button>
+
+        <div id="details-content"></div>
+
+    </main>
+
+</div>
+
+<!-- MOBILE NAVIGATION -->
+<div class="bottom-nav">
+
+    <a href="dashboard.html" class="nav-item">
+        <i data-lucide="house"></i>
+        <span>Home</span>
+    </a>
+
+    <a href="task.html" class="nav-item active">
+        <i data-lucide="check-square"></i>
+        <span>Tasks</span>
+    </a>
+
+    <a href="analytics.html" class="nav-item">
+        <i data-lucide="bar-chart-3"></i>
+        <span>Analytics</span>
+    </a>
+
+    <a href="calendar.html" class="nav-item">
+        <i data-lucide="calendar-days"></i>
+        <span>Calendar</span>
+    </a>
+
+    <a href="profile.html" class="nav-item">
+        <i data-lucide="user"></i>
+        <span>Profile</span>
+    </a>
+
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+
+<script>
+(function () {
+
+    const index = parseInt(localStorage.getItem("selectedTask"), 10);
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const content = document.getElementById("details-content");
+
+    /* ── guard: no valid task ── */
+    if (isNaN(index) || index < 0 || index >= tasks.length) {
+        content.innerHTML = `
+            <div class="not-found">
+                <h2>Task not found</h2>
+                <p>It may have been deleted. Go back to your task list.</p>
+            </div>`;
+        lucide.createIcons();
+        return;
+    }
+
+    const task = tasks[index];
+
+    /* ── helpers ── */
+    function priorityClass(p) {
+        const map = { low: "badge-low", medium: "badge-medium", high: "badge-high" };
+        return map[(p || "").toLowerCase()] || "badge-medium";
+    }
+
+    function formatDate(d) {
+        if (!d) return "—";
+        const date = new Date(d + "T00:00:00");
+        return date.toLocaleDateString("en-US", { weekday:"short", year:"numeric", month:"long", day:"numeric" });
+    }
+
+    function formatTime(t) {
+        if (!t) return "—";
+        const [h, m] = t.split(":");
+        const hour = parseInt(h, 10);
+        const ampm = hour >= 12 ? "PM" : "AM";
+        const display = ((hour % 12) || 12) + ":" + m + " " + ampm;
+        return display;
+    }
+
+    /* ── render ── */
+    function render() {
+        const t = tasks[index];
+
+        content.innerHTML = `
+            <div class="detail-card">
+
+                <div class="detail-title-row">
+                    <h1 id="task-title-el" class="${t.completed ? 'done' : ''}">${t.title}</h1>
+                </div>
+
+                <div class="badge-row">
+                    <span class="badge badge-category">
+                        <i data-lucide="tag"></i>
+                        ${t.category || "Uncategorized"}
+                    </span>
+                    <span class="badge ${priorityClass(t.priority)}">
+                        <i data-lucide="flag"></i>
+                        ${t.priority || "Medium"} Priority
+                    </span>
+                    <span class="badge ${t.completed ? 'badge-done' : 'badge-pending'}">
+                        <i data-lucide="${t.completed ? 'circle-check' : 'clock'}"></i>
+                        ${t.completed ? "Completed" : "Pending"}
+                    </span>
+                </div>
+
+                <p class="detail-section-label">Description</p>
+                <p class="detail-description">${t.description || "No description provided."}</p>
+
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <p class="meta-label">Due Date</p>
+                        <p class="meta-value">📅 ${formatDate(t.date)}</p>
+                    </div>
+                    <div class="meta-item">
+                        <p class="meta-label">Due Time</p>
+                        <p class="meta-value">⏰ ${formatTime(t.time)}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="action-row">
+                <button
+                    class="btn btn-complete ${t.completed ? 'is-done' : ''}"
+                    id="toggle-btn"
+                    onclick="toggleComplete()"
+                >
+                    <i data-lucide="${t.completed ? 'rotate-ccw' : 'circle-check'}"></i>
+                    ${t.completed ? "Mark Pending" : "Mark Complete"}
+                </button>
+
+                <button class="btn btn-delete" onclick="deleteTask()">
+                    <i data-lucide="trash-2"></i>
+                    Delete Task
+                </button>
+            </div>
+        `;
+
+        lucide.createIcons();
+    }
+
+    /* ── toggle complete ── */
+    window.toggleComplete = function () {
+        tasks[index].completed = !tasks[index].completed;
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        render();
+    };
+
+    /* ── delete ── */
+    window.deleteTask = function () {
+        if (!confirm("Delete this task? This can't be undone.")) return;
+        tasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        window.location.href = "task.html";
+    };
+
+    render();
+
+})();
+</script>
+
+</body>
+</html>

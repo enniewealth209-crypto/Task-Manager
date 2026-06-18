@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up</title>
+<link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- IMAGE SIDE -->
+    <div class="image-side">
+        <img src="luv.png" alt="Illustration">
+    </div>
+
+    <!-- FORM SIDE -->
+    <div class="form-side">
+
+        <h1>Create <span>Account.</span></h1>
+
+        <p>
+            Join thousands of users organizing tasks
+            and boosting productivity.
+        </p>
+
+        <form id="signupForm">
+
+            <div class="input-group">
+                <input type="text" id="fullName" placeholder="Full Name" required>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="signupEmail" placeholder="Email Address" required>
+            </div>
+
+            <div class="input-group password-box">
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    required
+                >
+                <span id="togglePassword">👁</span>
+            </div>
+
+            <div class="input-group password-box">
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm Password"
+                    required
+                >
+                <span id="toggleConfirm">👁</span>
+            </div>
+
+            <button type="submit" class="signup-btn">
+                Create Account
+            </button>
+
+            <p class="signin-link">
+                Already have an account?
+                <a href="sign_in.html">Sign In</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const name  = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("signupEmail").value.trim();
+
+        if (!name || !email) return;
+
+        // Save user info so dashboard can read it
+        localStorage.setItem("taskflowUser", JSON.stringify({ name, email }));
+
+        window.location.href = "dashboard.html";
+    });
+
+    // Password visibility toggles
+    document.getElementById("togglePassword").addEventListener("click", function() {
+        const p = document.getElementById("password");
+        p.type = p.type === "password" ? "text" : "password";
+    });
+
+    document.getElementById("toggleConfirm").addEventListener("click", function() {
+        const p = document.getElementById("confirmPassword");
+        p.type = p.type === "password" ? "text" : "password";
+    });
+</script>
+
+</body>
+</html>

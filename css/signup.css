@@ -1,0 +1,170 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f3f2f7;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:1200px;
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    display:flex;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+}
+
+/* IMAGE SIDE */
+
+.image-side{
+    flex:1;
+    background:#f8f6ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.image-side img{
+    width:100%;
+    max-width:500px;
+}
+
+/* FORM SIDE */
+
+.form-side{
+    flex:1;
+    padding:60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.form-side h1{
+    font-size:4rem;
+    line-height:1.1;
+    margin-bottom:15px;
+}
+
+.form-side span{
+    color:blueviolet;
+}
+
+.form-side p{
+    color:#666;
+    margin-bottom:30px;
+    font-size:1.05rem;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group input{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#f5f5f5;
+    border-radius:12px;
+    outline:none;
+    font-size:1rem;
+}
+
+.password-box{
+    position:relative;
+}
+
+.password-box span{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    font-size:20px;
+    user-select:none;
+}
+
+.signup-btn{
+    display:block;
+    width:100%;
+    text-align:center;
+    text-decoration:none;
+    color:white;
+    padding:15px;
+    border-radius:14px;
+    background:linear-gradient(
+        135deg,
+        #8b5cf6,
+        #6d28d9
+    );
+    transition:0.3s;
+}
+
+.signup-btn:hover{
+    transform:translateY(-3px);
+}
+
+.signin-link{
+    margin-top:20px;
+    text-align:center;
+}
+
+.signin-link a{
+    color:blueviolet;
+    text-decoration:none;
+    font-weight:600;
+}
+
+/* TABLET */
+
+@media(max-width:900px){
+
+.container{
+    flex-direction:column;
+}
+
+.image-side{
+    padding:25px;
+}
+
+.image-side img{
+    max-width:350px;
+}
+
+.form-side{
+    padding:40px;
+}
+
+.form-side h1{
+    font-size:3rem;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+.form-side{
+    padding:25px;
+}
+
+.form-side h1{
+    font-size:2.3rem;
+}
+
+.signup-btn{
+    padding:14px;
+}
+
+}

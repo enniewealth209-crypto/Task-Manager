@@ -4,69 +4,107 @@ const formContainer = document.getElementById("form-container");
 const emptyState = document.getElementById("empty-state");
 const taskGrid = document.getElementById("task-grid");
 
-// Dashboard elements
 const totalCount = document.getElementById("total-count");
 const pendingCount = document.getElementById("pending-count");
 const completedCount = document.getElementById("completed-count");
 
+<<<<<<< HEAD
 // Load external form
 fetch("task-form.html")
+=======
+/* LOAD FORM — only on task.html where form-container exists */
+
+if(formContainer){
+    fetch("create-task-form.html")
+>>>>>>> 19cf0451645e7d65622b45e4fb84d9330e34c4d9
     .then(res => res.text())
     .then(html => {
         formContainer.innerHTML = html;
-        initializeFormEvents(); // Initialize events after form loads
+        initializeFormEvents();
     });
+}
 
-function initializeFormEvents() {
+/* FORM EVENTS */
+
+function initializeFormEvents(){
+
     const backBtn = document.getElementById("back-btn");
     const saveBtn = document.getElementById("save-btn");
     const taskForm = document.getElementById("task-model");
 
-    // --- Open Form → Hide everything ---
     openFormBtn.onclick = () => {
+
         mainContent.style.display = "none";
         taskForm.style.display = "flex";
+
     };
 
-    // --- Close Form → Show everything ---
     backBtn.onclick = () => {
+
         taskForm.style.display = "none";
         mainContent.style.display = "block";
-        updateDashboard();
+
     };
 
-    // --- Category Selection ---
     document.querySelectorAll(".cate-btn").forEach(btn => {
+
         btn.onclick = () => {
-            document.querySelectorAll(".cate-btn").forEach(b => b.classList.remove("active"));
+
+            document
+            .querySelectorAll(".cate-btn")
+            .forEach(b => b.classList.remove("active"));
+
             btn.classList.add("active");
+
         };
+
     });
 
-    // --- Priority Selection ---
     document.querySelectorAll(".priority-btn").forEach(btn => {
+
         btn.onclick = () => {
-            document.querySelectorAll(".priority-btn").forEach(b => b.classList.remove("active"));
+
+            document
+            .querySelectorAll(".priority-btn")
+            .forEach(b => b.classList.remove("active"));
+
             btn.classList.add("active");
+
         };
+
     });
 
-    // --- Save New Task ---
     saveBtn.onclick = () => {
-        const title = document.getElementById("task-title").value.trim();
-        const desc = document.getElementById("task-desc").value.trim();
-        const date = document.getElementById("task-duedate").value;
-        const time = document.getElementById("task-duetime").value;
 
-        const category = document.querySelector(".cate-btn.active").textContent;
-        const priority = document.querySelector(".priority-btn.active").textContent;
+        const title =
+        document.getElementById("task-title").value.trim();
 
-        // Validate
-        if (!title || !desc || !date || !time) {
-            alert("Please fill all fields!");
+        const description =
+        document.getElementById("task-desc").value.trim();
+
+        const date =
+        document.getElementById("task-duedate").value;
+
+        const time =
+        document.getElementById("task-duetime").value;
+
+        const category =
+        document.querySelector(".cate-btn.active").textContent;
+
+        const priority =
+        document.querySelector(".priority-btn.active").textContent;
+
+        if(
+            !title ||
+            !description ||
+            !date ||
+            !time
+        ){
+            alert("Please fill all fields");
             return;
         }
 
+<<<<<<< HEAD
         // Create Task Card
         const card = document.createElement("div");
         card.className = "task-card";
@@ -88,48 +126,228 @@ function initializeFormEvents() {
                 <span><i class='bx bx-stopwatch'></i> ${time}</span>
             </div>
         `;
+=======
+        const task = {
 
-        // Complete Task
-        card.querySelector(".complete-btn").onclick = () => {
-            card.classList.toggle("completed");
-            updateDashboard();
+            title,
+            description,
+            date,
+            time,
+            category,
+            priority,
+            completed:false
+>>>>>>> 19cf0451645e7d65622b45e4fb84d9330e34c4d9
+
         };
 
-        // Delete Task
-        card.querySelector(".delete-btn").onclick = () => {
-            card.remove();
-            updateDashboard();
-        };
+        let tasks =
+        JSON.parse(
+            localStorage.getItem("tasks")
+        ) || [];
 
-        // Add to DOM
-        taskGrid.appendChild(card);
-        taskGrid.style.display = "grid";
+        tasks.push(task);
 
-        // Clear Form
+        localStorage.setItem(
+            "tasks",
+            JSON.stringify(tasks)
+        );
+
+        taskForm.style.display = "none";
+        mainContent.style.display = "block";
+
+        renderTasks();
+
         document.getElementById("task-title").value = "";
         document.getElementById("task-desc").value = "";
         document.getElementById("task-duedate").value = "";
         document.getElementById("task-duetime").value = "";
 
-        // Close Form
-        taskForm.style.display = "none";
-        mainContent.style.display = "block";
-
-        // Update Stats
-        updateDashboard();
     };
+
 }
 
-// --- Update Dashboard Counts ---
-function updateDashboard() {
-    const cards = document.querySelectorAll(".task-card");
-    const total = cards.length;
-    const completed = document.querySelectorAll(".task-card.completed").length;
-    const pending = total - completed;
+/* RENDER TASKS */
 
-    totalCount.textContent = total;
-    completedCount.textContent = completed;
-    pendingCount.textContent = pending;
+function renderTasks(){
 
-    emptyState.style.display = total === 0 ? "flex" : "none";
+    const tasks =
+    JSON.parse(
+        localStorage.getItem("tasks")
+    ) || [];
+
+    taskGrid.innerHTML = "";
+
+    if(tasks.length === 0){
+
+        emptyState.style.display = "flex";
+
+    }else{
+
+        emptyState.style.display = "none";
+
+    }
+
+    tasks.forEach((task,index)=>{
+
+        const card = document.createElement("div");
+
+        card.className = `task-card ${task.completed ? "completed" : ""}`;
+        card.style.cursor = "pointer";
+
+        card.innerHTML = `
+
+            <div class="card-header">
+
+                <h3>${task.title}</h3>
+
+                <div class="card-icons">
+
+                    <span
+                        class="complete-btn"
+                        title="${task.completed ? 'Mark pending' : 'Mark complete'}"
+                    >
+                        ✔
+                    </span>
+
+                    <span
+                        class="delete-btn"
+                        title="Delete task"
+                    >
+                        🗑
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+                <p>${task.description}</p>
+            </div>
+
+            <div class="card-footer">
+
+                <span class="task-cate">
+                    ${task.category}
+                </span>
+
+                <span class="priority-${task.priority.toLowerCase()}">
+                    ${task.priority}
+                </span>
+
+            </div>
+
+            <div class="card-deadline">
+
+                <span>📅 ${task.date}</span>
+
+                <span>⏰ ${task.time}</span>
+
+            </div>`;
+
+        // wire buttons first — stopPropagation prevents card click from firing
+        card.querySelector(".complete-btn").addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleTask(index);
+        });
+
+        card.querySelector(".delete-btn").addEventListener("click", (e) => {
+            e.stopPropagation();
+            deleteTask(index);
+        });
+
+        // clicking anywhere else on the card opens task details
+        card.addEventListener("click", () => openTask(index));
+
+        taskGrid.appendChild(card);
+
+    });
+
+    updateDashboard();
+
 }
+
+/* OPEN TASK DETAILS */
+
+function openTask(index){
+    localStorage.setItem("selectedTask", index);
+    window.location.href = "task-details.html";
+}
+
+/* COMPLETE */
+
+function toggleTask(index){
+
+    let tasks =
+    JSON.parse(
+        localStorage.getItem("tasks")
+    ) || [];
+
+    tasks[index].completed =
+    !tasks[index].completed;
+
+    localStorage.setItem(
+        "tasks",
+        JSON.stringify(tasks)
+    );
+
+    renderTasks();
+
+}
+
+/* DELETE */
+
+function deleteTask(index){
+
+    let tasks =
+    JSON.parse(
+        localStorage.getItem("tasks")
+    ) || [];
+
+    tasks.splice(index,1);
+
+    localStorage.setItem(
+        "tasks",
+        JSON.stringify(tasks)
+    );
+
+    renderTasks();
+
+}
+
+/* STATS */
+
+function updateDashboard(){
+
+    const tasks =
+    JSON.parse(
+        localStorage.getItem("tasks")
+    ) || [];
+
+    const total = tasks.length;
+
+    const completed =
+    tasks.filter(task => task.completed).length;
+
+    const pending =
+    total - completed;
+
+    // task.html counters
+    if(totalCount)    totalCount.textContent    = total;
+    if(completedCount) completedCount.textContent = completed;
+    if(pendingCount)  pendingCount.textContent   = pending;
+
+    // dashboard.html counters
+    const elTotal      = document.getElementById("totalTasks");
+    const elCompleted  = document.getElementById("completedTasks");
+    const elPending    = document.getElementById("pendingTasks");
+    const elRate       = document.getElementById("completionRate");
+
+    if(elTotal)     elTotal.textContent    = total;
+    if(elCompleted) elCompleted.textContent = completed;
+    if(elPending)   elPending.textContent   = pending;
+    if(elRate)      elRate.textContent      = (total > 0 ? Math.round((completed/total)*100) : 0) + "%";
+}
+
+/* INITIAL LOAD */
+
+if(taskGrid) renderTasks();
