@@ -4,76 +4,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="profile.css">
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/task.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+</head>
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-    <section class="first-card">
-        <nav class="header">
+    <div class="app">
+        <aside class="sidebar">
+
+            <h2>TaskFlow</h2>
+
+            <nav>
+
+                <a href="dashboard.html">
+                    <i data-lucide="house"></i>
+                    <span>Home</span>
+                </a>
+
+                <a href="task.html">
+                    <i data-lucide="check-square"></i>
+                    <span>Tasks</span>
+                </a>
+
+                <a href="analytics.html">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span>Analytics</span>
+                </a>
+
+                <a href="calendar.html">
+                    <i data-lucide="calendar-days"></i>
+                    <span>Calendar</span>
+                </a>
+
+                <a href="profile.html" class="active">
+                    <i data-lucide="user"></i>
+                    <span>Profile</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <section class="profile-page">
+
             <h2>Profile</h2>
-        </nav>
 
-        <div class="profile-card">
-            <div class="profile-circle">
-                <img src="asset/lady.png" alt="Profile" id="profile-img">
-            </div>
-            <input type="file" id="profile-upload" accept="image/*">
+            <div class="profile-card">
 
-            <div class="dashboard">
-                <div class="box">
-                    <span id="total-count">0</span>
-                    <p>Total</p>
+                <div class="profile-top">
+
+                    <div class="profile-circle" id="profile-circle">
+
+                        <img src="asset/lady.png" id="profile-img">
+
+                        <div class="camera-icon">
+                            <i class='bx bx-camera'></i>
+                        </div>
+
+                    </div>
+
+                    <input type="file" id="profile-upload" accept="image/*">
+
+
+                    <div class="user-info">
+
+                        <h3 id="username">Your Name</h3>
+
+                        <p id="email">your@email.com</p>
+
+                        <button id="edit-profile">Edit Profile</button>
+
+                    </div>
+
                 </div>
-                <div class="box">
-                    <span id="pending-count">0</span>
-                    <p>Pending</p>
+
+
+                <div id="main-content">
+                    <div class="dashboard">
+                        <div class="box">
+                            <p>Total: <span id="total-count">0</span></p>
+                        </div>
+                        <div class="box">
+                            <p>Pending: <span id="pending-count">0</span></p>
+                        </div>
+                        <div class="box">
+                            <p>Completed: <span id="completed-count">0</span></p>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="box">
-                    <span id="completed-count">0</span>
-                    <p>Completed</p>
+
+
+                <div class="settings-panel">
+
+                    <div class="setting-item">
+                        <i class='bx bx-shield'></i>
+                        <span>My Focus</span>
+
+                        <select id="focus">
+
+                            <option>Study</option>
+                            <option>Work</option>
+                            <option>Finance</option>
+                            <option>Personal</option>
+
+                        </select>
+                    </div>
+
+
+                    <div class="setting-item">
+
+                        <i class='bx bx-moon'></i>
+
+                        <span>Dark Mode</span>
+
+                        <label class="switch">
+
+                            <input type="checkbox" id="dark-toggle">
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting-item">
+
+                        <i class='bx bx-alarm'></i>
+
+                        <span>Reminders</span>
+
+                        <label class="switch">
+
+                            <input type="checkbox">
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="setting-item">
+
+                        <i class='bx bx-bell'></i>
+
+                        <span>Notifications</span>
+
+                        <i class='bx bx-chevron-right'></i>
+
+                    </div>
+
+
+                    <div class="setting-item">
+
+                        <i class='bx bx-cog'></i>
+
+                        <span>Settings</span>
+
+                        <i class='bx bx-chevron-right'></i>
+
+                    </div>
+
+
+                    <div class="setting-item">
+
+                        <i class='bx bx-help-circle'></i>
+
+                        <span>Help & Support</span>
+
+                        <i class='bx bx-chevron-right'></i>
+
+                    </div>
+
                 </div>
-            </div>
-        </div>
-    </section>
+
+                <button class="logout-btn" id="logout">Log Out</button>
+
+        </section>
 
 
-    <section class="pannel">
-        <div class="pannel-box">
-            <div class="focus">
-                My Focus
-                <select name="focus" id="focus" class="focus-slt">
-                    <option value="study">Study</option>
-                    <option value="work">Work</option>
-                    <option value="personal">Personal</option>
-                    <option value="education">Education</option>
-                    <option value="finance">Finance</option>
-                </select>
-            </div>
-            <div class="dark-mode">
-                <span>Dark Mode</span>
-            </div>
-            <div class="reminder">
-                <span>Reminder</span>
-            </div>
-            <div class="notification">
-                <span>Notification</span>
-                <select name="notification" id="notificaton" class="notification-slt">
-                    <option value="on">On</option>
-                    <option value="off">Off</option>
-                </select>
-            </div>
-            <div class="settings">
-                <span> Settings</span>
-            </div>
-            <div class="help">
-                <span>Help & Support</span>
-            </div>
+        <script src="profile.js"></script>
+        <script src="task.js"></script>
 
-        </div>
-
-    </section>
 </body>
-<script src="task.js"></script>
 
 </html>

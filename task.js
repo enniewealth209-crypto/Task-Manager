@@ -8,21 +8,13 @@ const totalCount = document.getElementById("total-count");
 const pendingCount = document.getElementById("pending-count");
 const completedCount = document.getElementById("completed-count");
 
-<<<<<<< HEAD
 // Load external form
 fetch("task-form.html")
-=======
-/* LOAD FORM — only on task.html where form-container exists */
-
-if(formContainer){
-    fetch("create-task-form.html")
->>>>>>> 19cf0451645e7d65622b45e4fb84d9330e34c4d9
     .then(res => res.text())
     .then(html => {
         formContainer.innerHTML = html;
         initializeFormEvents();
     });
-}
 
 /* FORM EVENTS */
 
@@ -104,8 +96,16 @@ function initializeFormEvents(){
             return;
         }
 
-<<<<<<< HEAD
-        // Create Task Card
+        const task = {
+            title,
+            description,
+            date,
+            time,
+            category,
+            priority,
+            completed: false
+        };
+
         const card = document.createElement("div");
         card.className = "task-card";
         card.innerHTML = `
@@ -116,7 +116,7 @@ function initializeFormEvents(){
                     <span class="delete-btn">🗑</span>
                 </div>
             </div>
-            <div class="card-body"><p>${desc}</p></div>
+            <div class="card-body"><p>${description}</p></div>
             <div class="card-footer">
                 <span class="task-cate">${category}</span>
                 <span class="priority-${priority.toLowerCase()}">${priority}</span>
@@ -126,19 +126,6 @@ function initializeFormEvents(){
                 <span><i class='bx bx-stopwatch'></i> ${time}</span>
             </div>
         `;
-=======
-        const task = {
-
-            title,
-            description,
-            date,
-            time,
-            category,
-            priority,
-            completed:false
->>>>>>> 19cf0451645e7d65622b45e4fb84d9330e34c4d9
-
-        };
 
         let tasks =
         JSON.parse(
