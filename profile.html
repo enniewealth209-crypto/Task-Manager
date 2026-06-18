@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+    <section class="first-card">
+        <nav class="header">
+            <h2>Profile</h2>
+        </nav>
+
+        <div class="profile-card">
+            <div class="profile-circle">
+                <img src="asset/lady.png" alt="Profile" id="profile-img">
+            </div>
+            <input type="file" id="profile-upload" accept="image/*">
+
+            <div class="dashboard">
+                <div class="box">
+                    <span id="total-count">0</span>
+                    <p>Total</p>
+                </div>
+                <div class="box">
+                    <span id="pending-count">0</span>
+                    <p>Pending</p>
+                </div>
+                <div class="box">
+                    <span id="completed-count">0</span>
+                    <p>Completed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="pannel">
+        <div class="pannel-box">
+            <div class="focus">
+                My Focus
+                <select name="focus" id="focus" class="focus-slt">
+                    <option value="study">Study</option>
+                    <option value="work">Work</option>
+                    <option value="personal">Personal</option>
+                    <option value="education">Education</option>
+                    <option value="finance">Finance</option>
+                </select>
+            </div>
+            <div class="dark-mode">
+                <span>Dark Mode</span>
+            </div>
+            <div class="reminder">
+                <span>Reminder</span>
+            </div>
+            <div class="notification">
+                <span>Notification</span>
+                <select name="notification" id="notificaton" class="notification-slt">
+                    <option value="on">On</option>
+                    <option value="off">Off</option>
+                </select>
+            </div>
+            <div class="settings">
+                <span> Settings</span>
+            </div>
+            <div class="help">
+                <span>Help & Support</span>
+            </div>
+
+        </div>
+
+    </section>
+</body>
+<script src="task.js"></script>
+
+</html>
