@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Dashboard</title>
+  <link rel="stylesheet" href="css/analytics.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <h2>TaskFlow</h2>
+
+    <nav>
+
+      <a href="dashboard.html">
+        <i data-lucide="house"></i>
+        <span>Home</span>
+      </a>
+
+      <a href="task.html">
+        <i data-lucide="check-square"></i>
+        <span>Tasks</span>
+      </a>
+
+      <a href="analytics.html" class="active">
+        <i data-lucide="bar-chart-3"></i>
+        <span>Analytics</span>
+      </a>
+
+      <a href="calendar.html">
+        <i data-lucide="calendar-days"></i>
+        <span>Calendar</span>
+      </a>
+
+      <a href="profile.html">
+        <i data-lucide="user"></i>
+        <span>Profile</span>
+      </a>
+
+    </nav>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="dashboard">
+
+    <div class="analytics-wrapper">
+
+      <h1>Analytics</h1>
+
+      <div class="top-card">
+
+        <!-- Circular Progress -->
+        <div class="progress-section">
+
+          <div class="progress-ring">
+            <svg viewBox="0 0 220 220" width="220" height="220">
+              <circle class="bg"       cx="110" cy="110" r="90"></circle>
+              <circle class="progress" cx="110" cy="110" r="90"></circle>
+            </svg>
+
+            <div class="progress-text">
+              <h2>68%</h2>
+              <p>Completed</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- divider -->
+        <div class="chart-divider"></div>
+
+        <!-- Bar Chart -->
+        <div class="chart-section">
+
+          <div class="bars">
+            <div class="bar" style="height:80px"></div>
+            <div class="bar" style="height:120px"></div>
+            <div class="bar" style="height:170px"></div>
+            <div class="bar" style="height:130px"></div>
+            <div class="bar" style="height:100px"></div>
+            <div class="bar" style="height:140px"></div>
+          </div>
+
+          <div class="labels">
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Categories -->
+      <div class="categories">
+
+        <div class="item">
+          <span>Work</span>
+          <div class="line"><div class="fill cat-work"></div></div>
+          <span>0%</span>
+        </div>
+
+        <div class="item">
+          <span>Personal</span>
+          <div class="line"><div class="fill cat-personal"></div></div>
+          <span>0%</span>
+        </div>
+
+        <div class="item">
+          <span>Finance</span>
+          <div class="line"><div class="fill cat-finance"></div></div>
+          <span>0%</span>
+        </div>
+
+        <div class="item">
+          <span>Health</span>
+          <div class="line"><div class="fill cat-health"></div></div>
+          <span>0%</span>
+        </div>
+
+        <div class="item">
+          <span>Education</span>
+          <div class="line"><div class="fill cat-education"></div></div>
+          <span>0%</span>
+        </div>
+
+        <div class="item">
+          <span>Other</span>
+          <div class="line"><div class="fill cat-other"></div></div>
+          <span>0%</span>
+        </div>
+
+      </div>
+
+  </main>
+
+</div>
+
+<!-- MOBILE NAVIGATION -->
+<div class="bottom-nav">
+
+  <a href="dashboard.html" class="nav-item">
+    <i data-lucide="house"></i>
+    <span>Home</span>
+  </a>
+
+  <a href="task.html" class="nav-item">
+    <i data-lucide="check-square"></i>
+    <span>Tasks</span>
+  </a>
+
+  <a href="analytics.html" class="nav-item active">
+    <i data-lucide="bar-chart-3"></i>
+    <span>Analytics</span>
+  </a>
+
+  <a href="calendar.html" class="nav-item">
+    <i data-lucide="calendar-days"></i>
+    <span>Calendar</span>
+  </a>
+
+  <a href="profile.html" class="nav-item">
+    <i data-lucide="user"></i>
+    <span>Profile</span>
+  </a>
+
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+
+<script>
+(function () {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    /* ── COMPLETION RING ── */
+    const total     = tasks.length;
+    const completed = tasks.filter(t => t.completed).length;
+    const pct       = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+    // circumference = 2π × r = 2π × 90 ≈ 565
+    const circumference = 565;
+    const offset        = circumference - (pct / 100) * circumference;
+
+    document.querySelector(".progress").style.strokeDashoffset = offset;
+    document.querySelector(".progress-text h2").textContent    = pct + "%";
+
+    /* ── CATEGORY BREAKDOWN ── */
+    const categories = ["Work", "Personal", "Finance", "Health", "Education", "Other"];
+    const counts     = {};
+    categories.forEach(c => counts[c] = 0);
+
+    tasks.forEach(t => {
+        const cat = t.category ? t.category.trim() : "";
+        if (counts.hasOwnProperty(cat)) counts[cat]++;
+        else counts["Other"]++;
+    });
+
+    const catItems = document.querySelectorAll(".categories .item");
+
+    catItems.forEach(item => {
+        const label   = item.querySelector("span:first-child").textContent.trim();
+        const fill    = item.querySelector(".fill");
+        const pctSpan = item.querySelector("span:last-child");
+
+        if (total > 0 && counts.hasOwnProperty(label)) {
+            const catPct = Math.round((counts[label] / total) * 100);
+            fill.style.width     = catPct + "%";
+            pctSpan.textContent  = catPct + "%";
+        } else {
+            fill.style.width    = "0%";
+            pctSpan.textContent = "0%";
+        }
+    });
+
+    /* ── WEEKLY BAR CHART ── */
+    // Count tasks created/due on each day of the current week (Mon–Sat)
+    const days     = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const dayCounts = [0, 0, 0, 0, 0, 0];
+
+    tasks.forEach(t => {
+        if (!t.date) return;
+        // date stored as YYYY-MM-DD
+        const d       = new Date(t.date);
+        const dayOfWk = d.getDay(); // 0=Sun,1=Mon...6=Sat
+        // Map Mon(1)→0 … Sat(6)→5, skip Sun
+        if (dayOfWk >= 1 && dayOfWk <= 6) {
+            dayCounts[dayOfWk - 1]++;
+        }
+    });
+
+    const maxCount = Math.max(...dayCounts, 1); // avoid division by zero
+    const maxHeight = 170; // px — matches the tallest bar in the original design
+    const minHeight = 10;  // px — so empty days still show a tiny stub
+
+    const bars = document.querySelectorAll(".bars .bar");
+    bars.forEach((bar, i) => {
+        const h = dayCounts[i] > 0
+            ? Math.round((dayCounts[i] / maxCount) * maxHeight)
+            : minHeight;
+        bar.style.height = h + "px";
+    });
+
+    /* ── EMPTY STATE: dim everything if no tasks ── */
+    if (total === 0) {
+        document.querySelector(".top-card").classList.add("dimmed");
+        document.querySelector(".categories").classList.add("dimmed");
+    } else {
+        document.querySelector(".top-card").classList.remove("dimmed");
+        document.querySelector(".categories").classList.remove("dimmed");
+    }
+})();
+</script>
+</body>
+</html>

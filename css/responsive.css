@@ -84,7 +84,15 @@
         font-size: 1rem;
     }
 
-    
+    .calendar-grid{
+        gap:5px;
+    }
+
+    .calendar-day{
+        min-height:70px;
+        font-size:.85rem;
+    }
+
 
 
     .register-card,

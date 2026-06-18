@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign Up</title>
-<link rel="stylesheet" href="signup.css">
+<link rel="stylesheet" href="css/signup.css">
 </head>
 <body>
 
@@ -25,14 +25,14 @@
             and boosting productivity.
         </p>
 
-        <form>
+        <form id="signupForm">
 
             <div class="input-group">
-                <input type="text" placeholder="Full Name" required>
+                <input type="text" id="fullName" placeholder="Full Name" required>
             </div>
 
             <div class="input-group">
-                <input type="email" placeholder="Email Address" required>
+                <input type="email" id="signupEmail" placeholder="Email Address" required>
             </div>
 
             <div class="input-group password-box">
@@ -55,13 +55,13 @@
                 <span id="toggleConfirm">👁</span>
             </div>
 
-            <a href="dashboard.html" class="signup-btn">
+            <button type="submit" class="signup-btn">
                 Create Account
-            </a>
+            </button>
 
             <p class="signin-link">
                 Already have an account?
-                <a href="eni.html">Sign In</a>
+                <a href="sign_in.html">Sign In</a>
             </p>
 
         </form>
@@ -70,7 +70,32 @@
 
 </div>
 
-<script src="eni.js"></script>
+<script>
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const name  = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("signupEmail").value.trim();
+
+        if (!name || !email) return;
+
+        // Save user info so dashboard can read it
+        localStorage.setItem("taskflowUser", JSON.stringify({ name, email }));
+
+        window.location.href = "dashboard.html";
+    });
+
+    // Password visibility toggles
+    document.getElementById("togglePassword").addEventListener("click", function() {
+        const p = document.getElementById("password");
+        p.type = p.type === "password" ? "text" : "password";
+    });
+
+    document.getElementById("toggleConfirm").addEventListener("click", function() {
+        const p = document.getElementById("confirmPassword");
+        p.type = p.type === "password" ? "text" : "password";
+    });
+</script>
 
 </body>
 </html>

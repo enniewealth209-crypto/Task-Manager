@@ -1,0 +1,298 @@
+/* ==========================
+   ANALYTICS PAGE LAYOUT
+========================== */
+
+/* Make the main area a flex column so content fills height */
+.app > main.dashboard {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  padding-bottom: 100px;
+  overflow-y: auto;
+}
+
+.analytics-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 24px;
+  height: 100%;
+}
+
+.analytics-wrapper h1 {
+  font-size: 1.6rem;
+  color: var(--text);
+}
+
+/* ==========================
+   TOP CARD (ring + bars)
+========================== */
+
+.top-card {
+  background: linear-gradient(135deg, #8f6fff, #6b0baa);
+  color: white;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  flex: 1;
+  min-height: 240px;
+}
+
+/* Circular Progress */
+.progress-ring {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  flex-shrink: 0;
+}
+
+.progress-ring svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 14;
+}
+
+.progress {
+  fill: none;
+  stroke: white;
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-dasharray: 565;
+  stroke-dashoffset: 565;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.progress-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-text h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.progress-text p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+/* Divider between ring and bar chart */
+.chart-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* Bar Chart */
+.chart-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 160px;
+}
+
+.bar {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 8px 8px 0 0;
+  min-height: 6px;
+  transition: height 0.4s ease;
+}
+
+.labels {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.labels span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.78rem;
+  opacity: 0.9;
+}
+
+/* ==========================
+   CATEGORIES CARD
+========================== */
+
+.categories {
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  flex: 1;
+}
+
+.categories h2 {
+  font-size: 1rem;
+  color: var(--gray, #777);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 90px 1fr 52px;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.item:last-child {
+  margin-bottom: 0;
+}
+
+.item > span:first-child {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text, #222);
+}
+
+.item > span:last-child {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: right;
+  color: var(--gray, #777);
+}
+
+.line {
+  height: 10px;
+  background: #eee;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+/* Category colours */
+.cat-work      { background: #7a5cff; }
+.cat-personal  { background: #f97316; }
+.cat-finance   { background: #32c36c; }
+.cat-health    { background: #ef4444; }
+.cat-education { background: #3b82f6; }
+.cat-other     { background: #a0aec0; }
+
+/* ==========================
+   EMPTY / DIM STATE
+========================== */
+
+.top-card.dimmed,
+.categories.dimmed {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .app > main.dashboard {
+    padding: 20px;
+    padding-bottom: 90px;
+  }
+
+  .top-card {
+    flex-direction: column;
+    align-items: center;
+    min-height: unset;
+  }
+
+  /* divider becomes horizontal on stacked layout */
+  .chart-divider {
+    width: 100%;
+    height: 1px;
+    align-self: auto;
+  }
+
+  .chart-section {
+    width: 100%;
+  }
+
+  .bars {
+    height: 130px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .app > main.dashboard {
+    padding: 16px;
+    padding-bottom: 80px;
+  }
+
+  .analytics-wrapper h1 {
+    font-size: 1.3rem;
+  }
+
+  .top-card {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .progress-ring {
+    width: 170px;
+    height: 170px;
+  }
+
+  .progress-text h2 {
+    font-size: 1.9rem;
+  }
+
+  .bars {
+    height: 100px;
+    gap: 8px;
+  }
+
+  .labels {
+    gap: 8px;
+  }
+
+  .labels span {
+    font-size: 0.7rem;
+  }
+
+  .categories {
+    padding: 20px;
+  }
+
+  .item {
+    grid-template-columns: 80px 1fr 44px;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .item > span:first-child {
+    font-size: 0.82rem;
+  }
+}

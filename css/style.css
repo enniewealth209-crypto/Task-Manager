@@ -494,3 +494,79 @@ img{
     line-height: 1.5;
     font-size: 14px;
 }
+
+.calendar-container{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:25px;
+}
+
+.calendar-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.calendar-header button{
+    border:none;
+    background:#6c4cff;
+    color:white;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.weekdays{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    text-align:center;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.calendar-day{
+    min-height:90px;
+    background:#f5f7fb;
+    border-radius:12px;
+    padding:10px;
+    cursor:pointer;
+    position:relative;
+}
+
+.calendar-day:hover{
+    background:#ece8ff;
+}
+
+.task-indicator{
+    position:absolute;
+    right:8px;
+    bottom:8px;
+
+    width:24px;
+    height:24px;
+
+    border-radius:50%;
+
+    background:#6c4cff;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:.8rem;
+}
+
+.calendar-tasks{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+}

@@ -27,22 +27,22 @@
                 <span>Home</span>
             </a>
 
-            <a href="task.html" target="_blank">
+            <a href="task.html">
                 <i data-lucide="check-square"></i>
                 <span>Tasks</span>
             </a>
 
-            <a href="analytics.html" target="_blank">
+            <a href="analytics.html">
                 <i data-lucide="bar-chart-3"></i>
                 <span>Analytics</span>
             </a>
 
-            <a href="calendar.html" target="_blank">
+            <a href="calendar.html">
                 <i data-lucide="calendar-days"></i>
                 <span>Calendar</span>
             </a>
 
-            <a href="profile.html" target="_blank">
+            <a href="profile.html">
                 <i data-lucide="user"></i>
                 <span>Profile</span>
             </a>
@@ -79,10 +79,7 @@
 
                 <div class="profile-area">
 
-                    <img
-                        src="asset/profile.png"
-                        alt="Profile"
-                    >
+                    <i data-lucide="user"></i>
 
                 </div>
 
@@ -94,7 +91,7 @@
 
         <div class="dashboard-links">
 
-            <a href="analytics.html" target="_blank">
+            <a href="analytics.html">
                 View Analytics →
             </a>
 
@@ -128,7 +125,7 @@
 
 
         <div class="dashboard-links">
-            <a href="task.html" target="_blank">
+            <a href="task.html">
                 My Tasks →
             </a>
 
@@ -162,22 +159,22 @@
         <span>Home</span>
     </a>
 
-    <a href="task.html" class="nav-item" target="_blank">
+    <a href="task.html" class="nav-item">
         <i data-lucide="check-square"></i>
         <span>Tasks</span>
     </a>
 
-    <a href="analytics.html" class="nav-item" target="_blank">
+    <a href="analytics.html" class="nav-item">
         <i data-lucide="bar-chart-3"></i>
         <span>Analytics</span>
     </a>
 
-    <a href="calendar.html" class="nav-item" target="_blank">
+    <a href="calendar.html" class="nav-item">
         <i data-lucide="calendar-days"></i>
         <span>Calendar</span>
     </a>
 
-    <a href="profile.html" class="nav-item" target="_blank">
+    <a href="profile.html" class="nav-item">
         <i data-lucide="user"></i>
         <span>Profile</span>
     </a>
@@ -186,122 +183,28 @@
 
 <script>
 
-/* USER */
-
 const user = JSON.parse(localStorage.getItem("taskflowUser"));
 
-if(user){
-    document.getElementById("welcomeMessage").textContent =`Good Morning, ${user.name} 👋`;
+function getGreeting() {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good Morning";
+    if (hour < 17) return "Good Afternoon";
+    return "Good Evening";
 }
 
-/* TASKS */
-
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-const taskContainer = document.getElementById("taskContainer");
-
-/* ANALYTICS */
-
-const total = tasks.length;
-
-const completed = tasks.filter(task => task.completed).length;
-
-const pending = total - completed;
-
-const percentage = total > 0?
-Math.round((completed / total) * 100):0;
-
-document.getElementById("totalTasks").textContent = total;
-
-document.getElementById("completedTasks").textContent = completed;
-
-document.getElementById("pendingTasks").textContent = pending;
-
-document.getElementById("completionRate").textContent =percentage + "%";
-
-/* TASK DISPLAY */
-
-if(tasks.length > 0){taskContainer.innerHTML ='<div class="task-list"></div>';
-
-const taskList =document.querySelector(".task-list");
-
-tasks.forEach((task,index)=>{
-    taskList.innerHTML += 
-    `<div class="task-card" onclick="openTask(${index})"> 
-        <div class="task-header">
-            <div class="task-check">
-                <input 
-                    type="checkbox" 
-                    ${task.completed ? "checked" : ""}
-                    onclick="toggleTask(event, ${index})"
-                >
-
-                <h3 class="${task.completed ? 'completed-task' : ''}">
-                    ${task.title}
-                </h3>
-
-            </div>
-
-            <button
-                class="delete-btn"
-                onclick="event.stopPropagation(); deleteTask(${index})"
-            >
-                <i data-lucide="trash-2"></i>
-            </button>
-
-            <div class="task-card 
-                ${task.completed ? 'completed' : ''}">
-        </div>
-
-            <p>${task.description}</p>
-            <p>${task.date} ${task.time}</p>
-            <span class="priority ${task.priority.toLowerCase()}">${task.priority}</span>
-
-    </div>`;
-    });
-}
-
-function toggleTask(event,index){
-
-    event.stopPropagation();
-
-    tasks[index].completed =
-        !tasks[index].completed;
-
-    localStorage.setItem(
-        "tasks",
-        JSON.stringify(tasks)
-    );
-
-    location.reload();
-}
-
-/* DELETE */
-
-function deleteTask(index){const confirmed = confirm("Delete this task?");
-
-    if(!confirmed) return;
-    tasks.splice(index,1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    location.reload();
-}
-
-/* OPEN */
-
-function openTask(index){localStorage.setItem("selectedTask", index);
-
-    window.location.href = "task-details.html";
+if (user) {
+    document.getElementById("welcomeMessage").textContent =
+        `${getGreeting()}, ${user.name} 👋`;
+} else {
+    document.getElementById("welcomeMessage").textContent =
+        `${getGreeting()} 👋`;
 }
 
 </script>
 
 <script src="https://unpkg.com/lucide@latest"></script>
-<script>
-    lucide.createIcons();
-</script>
-
-
-
+<script>lucide.createIcons();</script>
+<script src="task.js"></script>
 
 </body>
 </html>
