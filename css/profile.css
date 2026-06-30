@@ -75,18 +75,13 @@ body{
 
 .profile-card{
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--primary-light)
-        );
+    background:var(--card);
 
     border-radius:var(--radius-lg);
 
     padding:25px;
 
-    color:white;
+    color:var(--text);
 
     box-shadow:var(--shadow);
 }
@@ -100,6 +95,11 @@ body{
     display:flex;
     align-items:center;
     gap:20px;
+    background:linear-gradient(135deg,var(--primary),var(--primary-light));
+    border-radius:var(--radius-md);
+    padding:20px;
+    color:white;
+    margin-bottom:20px;
 }
 
 
@@ -154,48 +154,55 @@ body{
 
 
 /* =========================
-   USER INFO
+   PROFILE CIRCLE (image upload)
 ========================= */
 
-.user-info h3{
-    font-size:22px;
-    margin-bottom:4px;
-}
-
-
-.user-info p{
-    font-size:14px;
-    opacity:0.9;
-}
-
-
-.btn{
-
-    border:none;
-
+.profile-circle{
+    position:relative;
+    width:90px;
+    height:90px;
     cursor:pointer;
+    flex-shrink:0;
+}
 
+#profile-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid white;
+}
+
+.camera-icon{
+    position:absolute;
+    right:0;
+    bottom:0;
+    width:28px;
+    height:28px;
+    background:white;
+    color:var(--primary);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:var(--shadow);
+    font-size:14px;
+}
+
+#edit-profile{
+    margin-top:10px;
+    background:white;
+    color:var(--primary);
+    border:none;
     border-radius:10px;
-
-    padding:8px 14px;
-
+    padding:8px 16px;
+    font-weight:600;
+    cursor:pointer;
     transition:var(--transition);
 }
 
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-
-.btn-edit{
-
-    background:white;
-    color:var(--primary);
-
-    margin-top:12px;
-
-    font-weight:600;
+#edit-profile:hover{
+    background:#f0eaff;
 }
 
 
@@ -211,15 +218,15 @@ body{
 
     gap:15px;
 
-    margin-top:30px;
+    margin-top:10px;
 }
 
 
-.stat-card{
+.box{
 
-    background:rgba(255,255,255,0.15);
+    background:var(--bg);
 
-    backdrop-filter:blur(8px);
+    border:1px solid var(--border);
 
     padding:18px;
 
@@ -231,19 +238,25 @@ body{
 }
 
 
-.stat-card:hover{
+.box:hover{
     transform:translateY(-3px);
+    border-color:var(--primary);
 }
 
 
-.stat-card h3{
-    font-size:24px;
-}
-
-
-.stat-card p{
-    margin-top:5px;
+.box p{
     font-size:14px;
+    color:var(--text-light);
+    font-weight:500;
+}
+
+
+.box span{
+    display:block;
+    font-size:26px;
+    font-weight:700;
+    color:var(--primary);
+    margin-top:4px;
 }
 
 
@@ -307,8 +320,20 @@ body{
 
 
 /* =========================
-   SELECT
+   USER INFO TEXT
 ========================= */
+
+.user-info h3{
+    font-size:22px;
+    margin-bottom:4px;
+}
+
+.user-info p{
+    font-size:14px;
+    opacity:0.85;
+}
+
+
 
 select{
 
@@ -414,43 +439,112 @@ input:checked + .slider::before{
    DARK MODE
 ========================= */
 
-.dark{
+body.dark{
+    background:#121212 !important;
+    color:#e0e0e0 !important;
+}
 
-    background:#121212;
+/* Sidebar */
+body.dark .sidebar{
+    background:#1A1A2E;
+    border-right-color:#2a2a2a;
+}
 
+body.dark .sidebar h2{
+    color:#a78bfa;
+}
+
+body.dark .sidebar a{
+    color:#ccc;
+}
+
+body.dark .sidebar a:hover,
+body.dark .sidebar a.active{
+    background:#7c3aed;
     color:white;
 }
 
-
-.dark .settings-panel{
-    background:#1E1E1E;
+/* Cards & panels */
+body.dark .profile-card,
+body.dark .settings-panel,
+body.dark .stat-card,
+body.dark .task-card,
+body.dark .calendar-container,
+body.dark .calendar-tasks,
+body.dark .empty-state{
+    background:#1E1E1E !important;
+    color:#e0e0e0;
 }
 
-
-.dark .setting-item{
-    border-bottom:1px solid #333;
+body.dark .box{
+    background:#2a2a2a;
+    border-color:#333;
 }
 
+/* Setting items */
+body.dark .setting-item{
+    border-bottom-color:#333;
+    color:#e0e0e0;
+}
 
-.dark .setting-item:hover{
+body.dark .setting-item:hover{
     background:#2A2A2A;
 }
 
-
-.dark select{
+/* Select */
+body.dark select{
     background:transparent;
-    color:white;
+    color:#e0e0e0;
 }
 
+/* Logout */
+body.dark .logout-btn{
+    background:#1E1E1E;
+    color:#ef4444;
+}
 
-.dark .logout-btn{
+/* Dashboard / main area */
+body.dark .dashboard,
+body.dark main.dashboard{
+    background:#121212;
+}
+
+body.dark .dashboard-header h1,
+body.dark .user-info h1,
+body.dark h2,h3{
+    color:#e0e0e0;
+}
+
+body.dark .notification-btn{
     background:#1E1E1E;
 }
 
-
-.dark .page-title{
-    color:white;
+/* Calendar */
+body.dark .calendar-day{
+    background:#2a2a2a;
+    color:#e0e0e0;
 }
+
+body.dark .calendar-day:hover{
+    background:#3a3060;
+}
+
+/* Inputs */
+body.dark input,
+body.dark textarea,
+body.dark .form-group input,
+body.dark .form-group textarea,
+body.dark .form-group select{
+    background:#2a2a2a;
+    color:#e0e0e0;
+    border-color:#444;
+}
+
+/* Profile top header strip stays purple in dark too */
+body.dark .profile-top{
+    background:linear-gradient(135deg,#5b3ebf,#7c3aed);
+}
+
 
 
 /* =========================

@@ -11,6 +11,7 @@
     
 </head>
 <body>
+<script>if(localStorage.getItem("darkMode")==="true")document.body.classList.add("dark");</script>
 
 <div class="app">
 
@@ -77,11 +78,9 @@
                     🔔
                 </button>
 
-                <div class="profile-area">
-
-                    <i data-lucide="user"></i>
-
-                </div>
+                <a href="profile.html" class="profile-area">
+                    <img id="dash-profile-img" src="asset/lady.png" alt="Profile">
+                </a>
 
             </div>
 
@@ -205,6 +204,13 @@ if (user) {
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>lucide.createIcons();</script>
 <script src="task.js"></script>
+<script>
+    // Load profile picture saved from profile page
+    const savedProfileImg = localStorage.getItem("profileImage");
+    if (savedProfileImg) {
+        document.getElementById("dash-profile-img").src = savedProfileImg;
+    }
+</script>
 
 </body>
 </html>

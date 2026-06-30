@@ -1,178 +1,132 @@
+/* =============================================
+   PROFILE IMAGE UPLOAD
+============================================= */
+
 const profileCircle = document.getElementById("profile-circle");
-const uploadInput = document.getElementById("profile-upload");
-const profileImg = document.getElementById("profile-img");
+const uploadInput   = document.getElementById("profile-upload");
+const profileImg    = document.getElementById("profile-img");
 
-const username = document.getElementById("username");
-const email = document.getElementById("email");
-
-const editBtn = document.getElementById("edit-profile");
-
+const usernameEl = document.getElementById("username");
+const emailEl    = document.getElementById("email");
+const editBtn    = document.getElementById("edit-profile");
 const darkToggle = document.getElementById("dark-toggle");
+const logoutBtn  = document.getElementById("logout");
 
-const logoutBtn = document.getElementById("logout");
-
-
-
-/* PROFILE IMAGE */
 
 profileCircle.addEventListener("click", () => {
-
     uploadInput.click();
-
 });
-
 
 uploadInput.addEventListener("change", function () {
-
     const file = this.files[0];
-
     if (file) {
-
         const reader = new FileReader();
-
         reader.onload = function (e) {
-
             profileImg.src = e.target.result;
-
             localStorage.setItem("profileImage", e.target.result);
-
         };
-
         reader.readAsDataURL(file);
-
     }
-
 });
 
 
-
-/* EDIT NAME + EMAIL */
+/* =============================================
+   EDIT NAME + EMAIL
+============================================= */
 
 editBtn.addEventListener("click", () => {
-
-    const newName = prompt("Enter your name");
-
+    const newName  = prompt("Enter your name");
     const newEmail = prompt("Enter your email");
 
+    // Read existing user object and update it
+    const user = JSON.parse(localStorage.getItem("taskflowUser")) || {};
 
-    if (newName) {
-
-        username.textContent = newName;
-
-        localStorage.setItem("userName", newName);
-
+    if (newName && newName.trim()) {
+        user.name = newName.trim();
+        if (usernameEl) usernameEl.textContent = user.name;
     }
 
-
-    if (newEmail) {
-
-        email.textContent = newEmail;
-
-        localStorage.setItem("userEmail", newEmail);
-
+    if (newEmail && newEmail.trim()) {
+        user.email = newEmail.trim();
+        if (emailEl) emailEl.textContent = user.email;
     }
 
+    localStorage.setItem("taskflowUser", JSON.stringify(user));
 });
-/* Analysis Update*/
+
+
+/* =============================================
+   TASK ANALYTICS
+============================================= */
 
 function updateProfileAnalytics() {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const total     = tasks.length;
+    const completed = tasks.filter(t => t.completed).length;
+    const pending   = total - completed;
 
-    const tasks =
-        JSON.parse(
-            localStorage.getItem("tasks")
-        ) || [];
+    const totalEl     = document.getElementById("total-count");
+    const completedEl = document.getElementById("completed-count");
+    const pendingEl   = document.getElementById("pending-count");
 
-
-    const total = tasks.length;
-
-
-    const completed =
-        tasks.filter(task =>
-            task.completed
-        ).length;
-
-
-    const pending =
-        total - completed;
-
-
-    document.getElementById("total-count").textContent = total;
-
-    document.getElementById("completed-count").textContent = completed;
-
-    document.getElementById("pending-count").textContent = pending;
+    if (totalEl)     totalEl.textContent     = total;
+    if (completedEl) completedEl.textContent = completed;
+    if (pendingEl)   pendingEl.textContent   = pending;
 }
 
 
+/* =============================================
+   DARK MODE — togglable, persists across pages
+============================================= */
 
-/* DARK MODE */
+function applyDarkMode(enabled) {
+    document.body.classList.toggle("dark", enabled);
+    // Sync toggle if it exists on this page
+    if (darkToggle) darkToggle.checked = enabled;
+    localStorage.setItem("darkMode", enabled);
+}
 
-darkToggle.addEventListener("change", () => {
-
-    document.body.classList.toggle("dark");
-
-    localStorage.setItem(
-
-        "darkMode",
-
-        document.body.classList.contains("dark")
-
-    );
-
-});
+if (darkToggle) {
+    darkToggle.addEventListener("change", () => {
+        applyDarkMode(darkToggle.checked);
+    });
+}
 
 
-
-/* LOAD SAVED DATA */
+/* =============================================
+   LOAD SAVED DATA ON PAGE INIT
+============================================= */
 
 window.addEventListener("load", () => {
 
+    /* --- Dark mode (applies on every page that loads profile.js) --- */
+    const darkEnabled = localStorage.getItem("darkMode") === "true";
+    applyDarkMode(darkEnabled);
+
+    /* --- Profile image --- */
     const savedImage = localStorage.getItem("profileImage");
-    const savedName = localStorage.getItem("userName");
-    const savedEmail = localStorage.getItem("userEmail");
+    if (savedImage && profileImg) profileImg.src = savedImage;
 
+    /* --- User name & email from signup / signin --- */
+    const user = JSON.parse(localStorage.getItem("taskflowUser"));
 
-    if (savedImage) {
-
-        profileImg.src = savedImage;
-
-    }
-
-
-    if (savedName) {
-
-        username.textContent = savedName;
-
-    }
-
-
-    if (savedEmail) {
-
-        email.textContent = savedEmail;
-
-    }
-
-
-    if (localStorage.getItem("darkMode") === "true") {
-
-        document.body.classList.add("dark");
-
-        darkToggle.checked = true;
-
+    if (user) {
+        if (usernameEl) usernameEl.textContent = user.name  || "Your Name";
+        if (emailEl)    emailEl.textContent    = user.email || "your@email.com";
     }
 
     updateProfileAnalytics();
-
 });
 
 
-
-/* LOGOUT */
+/* =============================================
+   LOGOUT
+============================================= */
 
 logoutBtn.addEventListener("click", () => {
-
+    // Keep dark mode pref across sessions, clear everything else
+    const dark = localStorage.getItem("darkMode");
     localStorage.clear();
-
-    location.reload();
-
+    if (dark) localStorage.setItem("darkMode", dark);
+    window.location.href = "sign_in.html";
 });
