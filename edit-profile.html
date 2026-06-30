@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - TaskFlow</title>
+    <link rel="icon" type="image/png" href="asset/favicon.png">
+    <link rel="stylesheet" href="css/edit-profile.css">
+</head>
+<body>
+<script>
+    if (localStorage.getItem("darkMode") === "true") document.body.classList.add("dark");
+</script>
+
+<div class="container">
+
+    <!-- LEFT: profile picture picker -->
+    <div class="image-side">
+
+        <div class="avatar-wrap" id="avatar-wrap">
+            <img src="asset/lady.png" id="preview-img" alt="Profile photo">
+            <div class="avatar-overlay">
+                <span>📷 Change Photo</span>
+            </div>
+        </div>
+
+        <input type="file" id="photo-upload" accept="image/*">
+
+        <p class="photo-hint">Click the photo to change it</p>
+
+    </div>
+
+    <!-- RIGHT: form -->
+    <div class="form-side">
+
+        <h1>Edit <span>Profile.</span></h1>
+        <p>Update your name and email below.</p>
+
+        <form id="editForm">
+
+            <div class="input-group">
+                <input type="text" id="editName" placeholder="Full Name" required>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="editEmail" placeholder="Email Address" required>
+            </div>
+
+            <button type="submit" class="save-btn">Save Changes</button>
+
+            <p class="back-link">
+                <a href="profile.html">← Back to Profile</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    const previewImg  = document.getElementById("preview-img");
+    const avatarWrap  = document.getElementById("avatar-wrap");
+    const photoUpload = document.getElementById("photo-upload");
+    const editName    = document.getElementById("editName");
+    const editEmail   = document.getElementById("editEmail");
+
+    /* ── Pre-fill from localStorage ── */
+    const user = JSON.parse(localStorage.getItem("taskflowUser")) || {};
+    if (user.name)  editName.value  = user.name;
+    if (user.email) editEmail.value = user.email;
+
+    const savedImg = localStorage.getItem("profileImage");
+    if (savedImg) previewImg.src = savedImg;
+
+    /* ── Photo picker ── */
+    avatarWrap.addEventListener("click", () => photoUpload.click());
+
+    photoUpload.addEventListener("change", function () {
+        const file = this.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+            previewImg.src = e.target.result;
+            // save immediately so it's ready when we go back
+            localStorage.setItem("profileImage", e.target.result);
+        };
+        reader.readAsDataURL(file);
+    });
+
+    /* ── Save form ── */
+    document.getElementById("editForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name  = editName.value.trim();
+        const email = editEmail.value.trim();
+        if (!name || !email) return;
+
+        localStorage.setItem("taskflowUser", JSON.stringify({ name, email }));
+
+        window.location.href = "profile.html";
+    });
+</script>
+
+</body>
+</html>

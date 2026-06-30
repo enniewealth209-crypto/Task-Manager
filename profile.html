@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="icon" type="image/png" href="asset/favicon.png">
 
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/style.css">
@@ -24,7 +25,10 @@
 
     <aside class="sidebar">
 
-        <h2>TaskFlow</h2>
+        <div class="sidebar-brand">
+            <img src="asset/logo.png" alt="TaskFlow logo" class="sidebar-logo">
+            <h2>TaskFlow</h2>
+        </div>
 
         <nav>
 
@@ -163,6 +167,36 @@
     </section>
 
 </div><!-- /.app -->
+
+
+<div class="bottom-nav">
+
+    <a href="dashboard.html" class="nav-item">
+        <i data-lucide="house"></i>
+        <span>Home</span>
+    </a>
+
+    <a href="task.html" class="nav-item">
+        <i data-lucide="check-square"></i>
+        <span>Tasks</span>
+    </a>
+
+    <a href="analytics.html" class="nav-item">
+        <i data-lucide="bar-chart-3"></i>
+        <span>Analytics</span>
+    </a>
+
+    <a href="calendar.html" class="nav-item">
+        <i data-lucide="calendar-days"></i>
+        <span>Calendar</span>
+    </a>
+
+    <a href="profile.html" class="nav-item active">
+        <i data-lucide="user"></i>
+        <span>Profile</span>
+    </a>
+
+</div>
 
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>lucide.createIcons();</script>

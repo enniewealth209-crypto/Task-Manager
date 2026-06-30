@@ -31,27 +31,11 @@ uploadInput.addEventListener("change", function () {
 
 
 /* =============================================
-   EDIT NAME + EMAIL
+   EDIT PROFILE — navigate to edit page
 ============================================= */
 
 editBtn.addEventListener("click", () => {
-    const newName  = prompt("Enter your name");
-    const newEmail = prompt("Enter your email");
-
-    // Read existing user object and update it
-    const user = JSON.parse(localStorage.getItem("taskflowUser")) || {};
-
-    if (newName && newName.trim()) {
-        user.name = newName.trim();
-        if (usernameEl) usernameEl.textContent = user.name;
-    }
-
-    if (newEmail && newEmail.trim()) {
-        user.email = newEmail.trim();
-        if (emailEl) emailEl.textContent = user.email;
-    }
-
-    localStorage.setItem("taskflowUser", JSON.stringify(user));
+    window.location.href = "edit-profile.html";
 });
 
 

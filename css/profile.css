@@ -329,8 +329,9 @@ body{
 }
 
 .user-info p{
-    font-size:14px;
-    opacity:0.85;
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
 }
 
 
