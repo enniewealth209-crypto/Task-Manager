@@ -1,65 +1,74 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, sans-serif;
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-:root {
-    --primary-color: #765DE4;
-    --secondary-color: #F5F5F5;
-    --text-color: #333;
-    --secondary-text-color: #000;
-    --background-color: #fff;
-    --card-bg: #ffffff;
-    --border-radius: 12px;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+:root{
+
+    --primary:#765DE4;
+    --primary-light:#9A6DFF;
+
+    --bg:#F5F5F5;
+    --card:#FFFFFF;
+
+    --text:#1E1E1E;
+    --text-light:#666;
+
+    --danger:#E74C3C;
+
+    --border:#ECECEC;
+
+    --radius-sm:8px;
+    --radius-md:14px;
+    --radius-lg:20px;
+
+    --shadow:0 4px 14px rgba(0,0,0,0.08);
+
+    --transition:0.3s ease;
 }
 
-.header {
-    font-size: xx-large;
-    font-weight: 600px;
-    margin-left: 30px;
+
+body{
+    font-family:"Segoe UI", sans-serif;
+    background:var(--bg);
+    color:var(--text);
 }
 
-.profile-card {
-    width: 90%;
-    max-width: 700px;
-    margin: auto;
-    padding: 20px;
+
+/* =========================
+   APP LAYOUT
+========================= */
+
+.app{
+    display:flex;
+    min-height:100vh;
 }
 
-.profile-circle {
-    width: 120px;
-    height: 120px;
-    position: relative;
-    cursor: pointer;
-    margin: auto;
+
+/* =========================
+   PROFILE PAGE
+========================= */
+
+.profile-page{
+    flex:1;
+    padding:30px;
+    max-width:900px;
+    margin:auto;
 }
 
-.edit-icon {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    background: white;
-    padding: 6px;
-    border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+.page-title{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:25px;
 }
 
-.profile-circle img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--primary-color);
 
-<<<<<<< HEAD
-}
-
-#profile-upload {
-    display: none;
-=======
 /* =========================
    PROFILE CARD
 ========================= */
@@ -91,54 +100,17 @@
     padding:20px;
     color:white;
     margin-bottom:20px;
->>>>>>> 1b3014740eff876f49623498d626f3be436b6291
 }
 
-.dashboard {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-}
 
-#total-count,
-#pending-count,
-#completed-count {
-    font-weight: bold;
-    font-size: xx-large;
-}
-
-.box {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 15px;
-    border-radius: 12px;
-}
-
-.pannel-box {
-    line-height: 4rem;
-    margin: auto 60px;
-}
-
-.focus,
-.dark-mode,
-.notification,
-.settings,
-.help,
-.reminder{
-
-    transition:0.3s ease;
+.profile-avatar{
+    position:relative;
+    width:90px;
+    height:90px;
     cursor:pointer;
 }
 
-.focus:hover,
-.dark-mode:hover,
-.notification:hover,
-.settings:hover,
-.help:hover,
-.reminder:hover{
 
-<<<<<<< HEAD
-=======
 .profile-avatar img{
 
     width:100%;
@@ -267,29 +239,10 @@
 
 
 .box:hover{
->>>>>>> 1b3014740eff876f49623498d626f3be436b6291
     transform:translateY(-3px);
     border-color:var(--primary);
 }
-.dark {
-    background: #121212;
-    color: white;
-}
 
-<<<<<<< HEAD
-.dark .focus,
-.dark .help,
-.dark .settings,
-.dark .notification {
-    background: #1f1f1f;
-    color: white;
-}
-
-
-.focus-slt,
-.notification-slt {
-    border: none;
-=======
 
 .box p{
     font-size:14px;
@@ -304,16 +257,9 @@
     font-weight:700;
     color:var(--primary);
     margin-top:4px;
->>>>>>> 1b3014740eff876f49623498d626f3be436b6291
 }
 
-@media(max-width:600px){
 
-<<<<<<< HEAD
-    .header{
-        margin-left:10px;
-        font-size:25px;
-=======
 /* =========================
    SETTINGS PANEL
 ========================= */
@@ -610,29 +556,24 @@ body.dark .profile-top{
 
     .profile-page{
         padding:20px;
->>>>>>> 1b3014740eff876f49623498d626f3be436b6291
     }
 
     .dashboard{
         grid-template-columns:1fr;
     }
+}
 
-    .pannel-box{
-        margin:20px;
+
+@media(max-width:500px){
+
+    .profile-top{
+        flex-direction:column;
+        text-align:center;
     }
 
-    .focus,
-    .dark-mode,
-    .notification,
-    .settings,
-    .help,
-    .reminder{
-
-        padding:15px;
+    .setting-item{
         font-size:14px;
+        padding:15px 8px;
     }
 
-    .profile-circle{
-        margin:auto;
-    }
 }

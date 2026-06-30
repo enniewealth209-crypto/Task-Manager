@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskFlow Dashboard</title>
-    <link rel="icon" type="image/png" href="asset/favicon.png">
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -12,7 +11,6 @@
     
 </head>
 <body>
-<script>if(localStorage.getItem("darkMode")==="true")document.body.classList.add("dark");</script>
 
 <div class="app">
 
@@ -20,10 +18,7 @@
 
     <aside class="sidebar">
 
-        <div class="sidebar-brand">
-            <img src="asset/logo.png" alt="TaskFlow logo" class="sidebar-logo">
-            <h2>TaskFlow</h2>
-        </div>
+        <h2>TaskFlow</h2>
 
         <nav>
 
@@ -32,7 +27,7 @@
                 <span>Home</span>
             </a>
 
-            <a href="index.html">
+            <a href="task.html">
                 <i data-lucide="check-square"></i>
                 <span>Tasks</span>
             </a>
@@ -82,9 +77,11 @@
                     🔔
                 </button>
 
-                <a href="profile.html" class="profile-area">
-                    <img id="dash-profile-img" src="asset/lady.png" alt="Profile">
-                </a>
+                <div class="profile-area">
+
+                    <i data-lucide="user"></i>
+
+                </div>
 
             </div>
 
@@ -128,7 +125,7 @@
 
 
         <div class="dashboard-links">
-            <a href="index.html">
+            <a href="task.html">
                 My Tasks →
             </a>
 
@@ -162,7 +159,7 @@
         <span>Home</span>
     </a>
 
-    <a href="index.html" class="nav-item">
+    <a href="task.html" class="nav-item">
         <i data-lucide="check-square"></i>
         <span>Tasks</span>
     </a>
@@ -208,13 +205,6 @@ if (user) {
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>lucide.createIcons();</script>
 <script src="task.js"></script>
-<script>
-    // Load profile picture saved from profile page
-    const savedProfileImg = localStorage.getItem("profileImage");
-    if (savedProfileImg) {
-        document.getElementById("dash-profile-img").src = savedProfileImg;
-    }
-</script>
 
 </body>
 </html>
