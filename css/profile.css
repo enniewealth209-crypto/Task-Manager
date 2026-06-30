@@ -54,10 +54,44 @@
     object-fit: cover;
     border: 4px solid var(--primary-color);
 
+<<<<<<< HEAD
 }
 
 #profile-upload {
     display: none;
+=======
+/* =========================
+   PROFILE CARD
+========================= */
+
+.profile-card{
+
+    background:var(--card);
+
+    border-radius:var(--radius-lg);
+
+    padding:25px;
+
+    color:var(--text);
+
+    box-shadow:var(--shadow);
+}
+
+
+/* =========================
+   TOP SECTION
+========================= */
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    background:linear-gradient(135deg,var(--primary),var(--primary-light));
+    border-radius:var(--radius-md);
+    padding:20px;
+    color:white;
+    margin-bottom:20px;
+>>>>>>> 1b3014740eff876f49623498d626f3be436b6291
 }
 
 .dashboard {
@@ -103,13 +137,146 @@
 .help:hover,
 .reminder:hover{
 
+<<<<<<< HEAD
+=======
+.profile-avatar img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:3px solid white;
+}
+
+
+.avatar-edit{
+
+    position:absolute;
+
+    right:0;
+    bottom:0;
+
+    width:28px;
+    height:28px;
+
+    background:white;
+
+    color:var(--text);
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:var(--shadow);
+}
+
+
+#profile-upload{
+    display:none;
+}
+
+
+/* =========================
+   PROFILE CIRCLE (image upload)
+========================= */
+
+.profile-circle{
+    position:relative;
+    width:90px;
+    height:90px;
+    cursor:pointer;
+    flex-shrink:0;
+}
+
+#profile-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid white;
+}
+
+.camera-icon{
+    position:absolute;
+    right:0;
+    bottom:0;
+    width:28px;
+    height:28px;
+    background:white;
+    color:var(--primary);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:var(--shadow);
+    font-size:14px;
+}
+
+#edit-profile{
+    margin-top:10px;
+    background:white;
+    color:var(--primary);
+    border:none;
+    border-radius:10px;
+    padding:8px 16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:var(--transition);
+}
+
+#edit-profile:hover{
+    background:#f0eaff;
+}
+
+
+/* =========================
+   ANALYTICS
+========================= */
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:15px;
+
+    margin-top:10px;
+}
+
+
+.box{
+
+    background:var(--bg);
+
+    border:1px solid var(--border);
+
+    padding:18px;
+
+    border-radius:14px;
+
+    text-align:center;
+
+    transition:var(--transition);
+}
+
+
+.box:hover{
+>>>>>>> 1b3014740eff876f49623498d626f3be436b6291
     transform:translateY(-3px);
+    border-color:var(--primary);
 }
 .dark {
     background: #121212;
     color: white;
 }
 
+<<<<<<< HEAD
 .dark .focus,
 .dark .help,
 .dark .settings,
@@ -122,13 +289,328 @@
 .focus-slt,
 .notification-slt {
     border: none;
+=======
+
+.box p{
+    font-size:14px;
+    color:var(--text-light);
+    font-weight:500;
+}
+
+
+.box span{
+    display:block;
+    font-size:26px;
+    font-weight:700;
+    color:var(--primary);
+    margin-top:4px;
+>>>>>>> 1b3014740eff876f49623498d626f3be436b6291
 }
 
 @media(max-width:600px){
 
+<<<<<<< HEAD
     .header{
         margin-left:10px;
         font-size:25px;
+=======
+/* =========================
+   SETTINGS PANEL
+========================= */
+
+.settings-panel{
+
+    margin-top:25px;
+
+    background:var(--card);
+
+    border-radius:var(--radius-md);
+
+    padding:12px;
+
+    box-shadow:var(--shadow);
+}
+
+
+.setting-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:18px 10px;
+
+    border-bottom:1px solid var(--border);
+
+    transition:var(--transition);
+
+    cursor:pointer;
+}
+
+
+.setting-item:last-child{
+    border-bottom:none;
+}
+
+
+.setting-item:hover{
+
+    background:#F8F8F8;
+
+    border-radius:10px;
+}
+
+
+.setting-item span{
+    flex:1;
+}
+
+
+.setting-item i{
+    font-size:20px;
+}
+
+
+/* =========================
+   USER INFO TEXT
+========================= */
+
+.user-info h3{
+    font-size:22px;
+    margin-bottom:4px;
+}
+
+.user-info p{
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+}
+
+
+
+select{
+
+    border:none;
+
+    background:transparent;
+
+    outline:none;
+
+    cursor:pointer;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   SWITCH
+========================= */
+
+.switch{
+
+    position:relative;
+
+    width:48px;
+    height:24px;
+}
+
+
+.switch input{
+    display:none;
+}
+
+
+.slider{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#ccc;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+}
+
+
+.slider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+    height:18px;
+
+    left:3px;
+    top:3px;
+
+    background:white;
+
+    border-radius:50%;
+
+    transition:var(--transition);
+}
+
+
+input:checked + .slider{
+    background:var(--primary);
+}
+
+
+input:checked + .slider::before{
+    transform:translateX(24px);
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logout-btn{
+
+    width:100%;
+
+    margin-top:20px;
+
+    background:var(--card);
+
+    color:var(--danger);
+
+    font-weight:600;
+
+    padding:16px;
+
+    box-shadow:var(--shadow);
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark{
+    background:#121212 !important;
+    color:#e0e0e0 !important;
+}
+
+/* Sidebar */
+body.dark .sidebar{
+    background:#1A1A2E;
+    border-right-color:#2a2a2a;
+}
+
+body.dark .sidebar h2{
+    color:#a78bfa;
+}
+
+body.dark .sidebar a{
+    color:#ccc;
+}
+
+body.dark .sidebar a:hover,
+body.dark .sidebar a.active{
+    background:#7c3aed;
+    color:white;
+}
+
+/* Cards & panels */
+body.dark .profile-card,
+body.dark .settings-panel,
+body.dark .stat-card,
+body.dark .task-card,
+body.dark .calendar-container,
+body.dark .calendar-tasks,
+body.dark .empty-state{
+    background:#1E1E1E !important;
+    color:#e0e0e0;
+}
+
+body.dark .box{
+    background:#2a2a2a;
+    border-color:#333;
+}
+
+/* Setting items */
+body.dark .setting-item{
+    border-bottom-color:#333;
+    color:#e0e0e0;
+}
+
+body.dark .setting-item:hover{
+    background:#2A2A2A;
+}
+
+/* Select */
+body.dark select{
+    background:transparent;
+    color:#e0e0e0;
+}
+
+/* Logout */
+body.dark .logout-btn{
+    background:#1E1E1E;
+    color:#ef4444;
+}
+
+/* Dashboard / main area */
+body.dark .dashboard,
+body.dark main.dashboard{
+    background:#121212;
+}
+
+body.dark .dashboard-header h1,
+body.dark .user-info h1,
+body.dark h2,h3{
+    color:#e0e0e0;
+}
+
+body.dark .notification-btn{
+    background:#1E1E1E;
+}
+
+/* Calendar */
+body.dark .calendar-day{
+    background:#2a2a2a;
+    color:#e0e0e0;
+}
+
+body.dark .calendar-day:hover{
+    background:#3a3060;
+}
+
+/* Inputs */
+body.dark input,
+body.dark textarea,
+body.dark .form-group input,
+body.dark .form-group textarea,
+body.dark .form-group select{
+    background:#2a2a2a;
+    color:#e0e0e0;
+    border-color:#444;
+}
+
+/* Profile top header strip stays purple in dark too */
+body.dark .profile-top{
+    background:linear-gradient(135deg,#5b3ebf,#7c3aed);
+}
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .profile-page{
+        padding:20px;
+>>>>>>> 1b3014740eff876f49623498d626f3be436b6291
     }
 
     .dashboard{

@@ -62,6 +62,25 @@ img{
     margin-bottom:30px;
 }
 
+.sidebar-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.sidebar-brand h2{
+    color:var(--primary);
+    margin-bottom:0;
+}
+
+.sidebar-logo{
+    width:36px;
+    height:36px;
+    object-fit:contain;
+    border-radius:8px;
+}
+
 .sidebar nav{
     display:flex;
     flex-direction:column;
@@ -569,4 +588,80 @@ img{
     background:white;
     padding:25px;
     border-radius:20px;
+}
+
+
+/* ==========================
+   DARK MODE (toggled from profile)
+========================== */
+
+body.dark{
+    background:#121212;
+    color:#e0e0e0;
+}
+
+body.dark .sidebar{
+    background:#1a1a2e;
+    border-right-color:#2a2a2a;
+}
+
+body.dark .sidebar h2{
+    color:#a78bfa;
+}
+
+body.dark .sidebar a{
+    color:#ccc;
+}
+
+body.dark .sidebar a:hover,
+body.dark .sidebar a.active{
+    background:#7c3aed;
+    color:white;
+}
+
+body.dark .stat-card,
+body.dark .task-card,
+body.dark .empty-state,
+body.dark .calendar-container,
+body.dark .calendar-tasks,
+body.dark .container{
+    background:#1e1e1e;
+    color:#e0e0e0;
+}
+
+body.dark .stat-card h3{
+    color:#aaa;
+}
+
+body.dark .task-card p{
+    color:#aaa;
+}
+
+body.dark .notification-btn{
+    background:#1e1e1e;
+    color:#e0e0e0;
+}
+
+body.dark main.dashboard,
+body.dark .dashboard{
+    background:#121212;
+}
+
+body.dark .calendar-day{
+    background:#2a2a2a;
+    color:#e0e0e0;
+}
+
+body.dark .calendar-day:hover{
+    background:#3a3060;
+}
+
+body.dark h1,
+body.dark h2,
+body.dark h3{
+    color:#e0e0e0;
+}
+
+body.dark .user-info p{
+    color:#aaa;
 }
