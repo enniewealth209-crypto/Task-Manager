@@ -219,7 +219,7 @@
                 <span>Home</span>
             </a>
 
-            <a href="task.html" class="active">
+            <a href="index.html" class="active">
                 <i data-lucide="check-square"></i>
                 <span>Tasks</span>
             </a>
@@ -265,7 +265,7 @@
         <span>Home</span>
     </a>
 
-    <a href="task.html" class="nav-item active">
+    <a href="index.html" class="nav-item active">
         <i data-lucide="check-square"></i>
         <span>Tasks</span>
     </a>
@@ -405,7 +405,7 @@
         if (!confirm("Delete this task? This can't be undone.")) return;
         tasks.splice(index, 1);
         localStorage.setItem("tasks", JSON.stringify(tasks));
-        window.location.href = "task.html";
+        window.location.href = "index.html";
     };
 
     render();

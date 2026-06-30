@@ -1,484 +1,156 @@
-/* =========================
-   RESET
-========================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-:root{
-
-    --primary:#765DE4;
-    --primary-light:#9A6DFF;
-
-    --bg:#F5F5F5;
-    --card:#FFFFFF;
-
-    --text:#1E1E1E;
-    --text-light:#666;
-
-    --danger:#E74C3C;
-
-    --border:#ECECEC;
-
-    --radius-sm:8px;
-    --radius-md:14px;
-    --radius-lg:20px;
-
-    --shadow:0 4px 14px rgba(0,0,0,0.08);
-
-    --transition:0.3s ease;
+:root {
+    --primary-color: #765DE4;
+    --secondary-color: #F5F5F5;
+    --text-color: #333;
+    --secondary-text-color: #000;
+    --background-color: #fff;
+    --card-bg: #ffffff;
+    --border-radius: 12px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-
-body{
-    font-family:"Segoe UI", sans-serif;
-    background:var(--bg);
-    color:var(--text);
+.header {
+    font-size: xx-large;
+    font-weight: 600px;
+    margin-left: 30px;
 }
 
-
-/* =========================
-   APP LAYOUT
-========================= */
-
-.app{
-    display:flex;
-    min-height:100vh;
+.profile-card {
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
 }
 
-
-/* =========================
-   PROFILE PAGE
-========================= */
-
-.profile-page{
-    flex:1;
-    padding:30px;
-    max-width:900px;
-    margin:auto;
+.profile-circle {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    cursor: pointer;
+    margin: auto;
 }
 
-
-.page-title{
-    font-size:28px;
-    font-weight:700;
-    margin-bottom:25px;
+.edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: white;
+    padding: 6px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-color);
 
-/* =========================
-   PROFILE CARD
-========================= */
-
-.profile-card{
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--primary-light)
-        );
-
-    border-radius:var(--radius-lg);
-
-    padding:25px;
-
-    color:white;
-
-    box-shadow:var(--shadow);
 }
 
-
-/* =========================
-   TOP SECTION
-========================= */
-
-.profile-top{
-    display:flex;
-    align-items:center;
-    gap:20px;
+#profile-upload {
+    display: none;
 }
 
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
 
-.profile-avatar{
-    position:relative;
-    width:90px;
-    height:90px;
+#total-count,
+#pending-count,
+#completed-count {
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.pannel-box {
+    line-height: 4rem;
+    margin: auto 60px;
+}
+
+.focus,
+.dark-mode,
+.notification,
+.settings,
+.help,
+.reminder{
+
+    transition:0.3s ease;
     cursor:pointer;
 }
 
+.focus:hover,
+.dark-mode:hover,
+.notification:hover,
+.settings:hover,
+.help:hover,
+.reminder:hover{
 
-.profile-avatar img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    border-radius:50%;
-
-    border:3px solid white;
-}
-
-
-.avatar-edit{
-
-    position:absolute;
-
-    right:0;
-    bottom:0;
-
-    width:28px;
-    height:28px;
-
-    background:white;
-
-    color:var(--text);
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    box-shadow:var(--shadow);
-}
-
-
-#profile-upload{
-    display:none;
-}
-
-
-/* =========================
-   USER INFO
-========================= */
-
-.user-info h3{
-    font-size:22px;
-    margin-bottom:4px;
-}
-
-
-.user-info p{
-    font-size:14px;
-    opacity:0.9;
-}
-
-
-.btn{
-
-    border:none;
-
-    cursor:pointer;
-
-    border-radius:10px;
-
-    padding:8px 14px;
-
-    transition:var(--transition);
-}
-
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-
-.btn-edit{
-
-    background:white;
-    color:var(--primary);
-
-    margin-top:12px;
-
-    font-weight:600;
-}
-
-
-/* =========================
-   ANALYTICS
-========================= */
-
-.dashboard{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:15px;
-
-    margin-top:30px;
-}
-
-
-.stat-card{
-
-    background:rgba(255,255,255,0.15);
-
-    backdrop-filter:blur(8px);
-
-    padding:18px;
-
-    border-radius:14px;
-
-    text-align:center;
-
-    transition:var(--transition);
-}
-
-
-.stat-card:hover{
     transform:translateY(-3px);
 }
+.dark {
+    background: #121212;
+    color: white;
+}
 
-
-.stat-card h3{
-    font-size:24px;
+.dark .focus,
+.dark .help,
+.dark .settings,
+.dark .notification {
+    background: #1f1f1f;
+    color: white;
 }
 
 
-.stat-card p{
-    margin-top:5px;
-    font-size:14px;
+.focus-slt,
+.notification-slt {
+    border: none;
 }
 
-
-/* =========================
-   SETTINGS PANEL
-========================= */
-
-.settings-panel{
-
-    margin-top:25px;
-
-    background:var(--card);
-
-    border-radius:var(--radius-md);
-
-    padding:12px;
-
-    box-shadow:var(--shadow);
-}
-
-
-.setting-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    padding:18px 10px;
-
-    border-bottom:1px solid var(--border);
-
-    transition:var(--transition);
-
-    cursor:pointer;
-}
-
-
-.setting-item:last-child{
-    border-bottom:none;
-}
-
-
-.setting-item:hover{
-
-    background:#F8F8F8;
-
-    border-radius:10px;
-}
-
-
-.setting-item span{
-    flex:1;
-}
-
-
-.setting-item i{
-    font-size:20px;
-}
-
-
-/* =========================
-   SELECT
-========================= */
-
-select{
-
-    border:none;
-
-    background:transparent;
-
-    outline:none;
-
-    cursor:pointer;
-
-    font-size:14px;
-}
-
-
-/* =========================
-   SWITCH
-========================= */
-
-.switch{
-
-    position:relative;
-
-    width:48px;
-    height:24px;
-}
-
-
-.switch input{
-    display:none;
-}
-
-
-.slider{
-
-    position:absolute;
-
-    inset:0;
-
-    background:#ccc;
-
-    border-radius:50px;
-
-    cursor:pointer;
-
-    transition:var(--transition);
-}
-
-
-.slider::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:18px;
-    height:18px;
-
-    left:3px;
-    top:3px;
-
-    background:white;
-
-    border-radius:50%;
-
-    transition:var(--transition);
-}
-
-
-input:checked + .slider{
-    background:var(--primary);
-}
-
-
-input:checked + .slider::before{
-    transform:translateX(24px);
-}
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-.logout-btn{
-
-    width:100%;
-
-    margin-top:20px;
-
-    background:var(--card);
-
-    color:var(--danger);
-
-    font-weight:600;
-
-    padding:16px;
-
-    box-shadow:var(--shadow);
-}
-
-
-/* =========================
-   DARK MODE
-========================= */
-
-.dark{
-
-    background:#121212;
-
-    color:white;
-}
-
-
-.dark .settings-panel{
-    background:#1E1E1E;
-}
-
-
-.dark .setting-item{
-    border-bottom:1px solid #333;
-}
-
-
-.dark .setting-item:hover{
-    background:#2A2A2A;
-}
-
-
-.dark select{
-    background:transparent;
-    color:white;
-}
-
-
-.dark .logout-btn{
-    background:#1E1E1E;
-}
-
-
-.dark .page-title{
-    color:white;
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:768px){
-
-    .profile-page{
-        padding:20px;
+@media(max-width:600px){
+
+    .header{
+        margin-left:10px;
+        font-size:25px;
     }
 
     .dashboard{
         grid-template-columns:1fr;
     }
-}
 
-
-@media(max-width:500px){
-
-    .profile-top{
-        flex-direction:column;
-        text-align:center;
+    .pannel-box{
+        margin:20px;
     }
 
-    .setting-item{
+    .focus,
+    .dark-mode,
+    .notification,
+    .settings,
+    .help,
+    .reminder{
+
+        padding:15px;
         font-size:14px;
-        padding:15px 8px;
     }
 
+    .profile-circle{
+        margin:auto;
+    }
 }
